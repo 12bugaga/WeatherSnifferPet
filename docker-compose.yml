@@ -1,0 +1,22 @@
+services:
+  webweather:
+    image: ${DOCKER_REGISTRY-}webweather
+    build:
+      context: .
+      dockerfile: WebWeather/Dockerfile
+    depends_on:
+      - mongodb
+
+  workerweather:
+    image: ${DOCKER_REGISTRY-}workerweather
+    build:
+      context: .
+      dockerfile: WorkerWeather/Dockerfile
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+      
